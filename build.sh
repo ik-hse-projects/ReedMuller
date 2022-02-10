@@ -1,13 +1,16 @@
 #!/bin/sh
 set -e
 
-MK="latexmk -shell-escape -lualatex -aux-directory=out/ -emulate-aux-dir -interaction=nonstopmode"
+MK="latexmk -shell-escape -lualatex -aux-directory=aux/ -emulate-aux-dir -interaction=nonstopmode ./ReedMuller.tex"
 
 if [ "$#" -gt 0 ]; then
-    $MK "$@"
+    jobname="$1"
+    shift
+    $MK -jobname="ReedMuller-$jobname" "$@"
 else
-    $MK ./presentation.tex
-    $MK ./with_notes.tex
-    $MK ./article.tex
+    $MK -jobname=ReedMuller-article
+    $MK -jobname=ReedMuller-handout
+    $MK -jobname=ReedMuller-slides
+    $MK -jobname=ReedMuller-trans
 fi
 

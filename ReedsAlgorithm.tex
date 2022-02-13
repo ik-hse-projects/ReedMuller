@@ -129,7 +129,8 @@
     Теперь докажем, что мы перечислили все смежные классы. Как доказано ранее, их всего $2^{m - |A|}$. С другой стороны, $|V_{\overbar{A}}| = 2^{|\overbar{A}|} = 2^{m - |A|}$. Поскольку все элементы множества различны, то оно содержит все смежные классы.
 \end{proof}
 
-\newgeometry{margin=11mm,bottom=20mm}
+\newgeometry{margin=11mm}
+\thispagestyle{empty}
 \subsection{Реализация алгоритма}
 Битовые векторы храним как int. Нумеруются справа налево, нулевой элемент на самой правой позиции int.
 Тогда: $u + v = \mintinline{python}{u ^ v}$ и $v_i = \mintinline{python}{(v >> i) & 1}$ (нумерация здесь с нуля, $i∈\{0,…,n-1\}$).
@@ -138,7 +139,25 @@
 \begin{multicols*}{2}
     \setlength{\columnseprule}{0.2pt}
     \setmonofont{Fira Code}[Contextuals=Alternate,Scale=MatchLowercase]
-    \fontsize{9pt}{11pt}
-    \inputminted[mathescape,breaklines,python3]{python}{ReedsAlgorithm.py}
+    \fontsize{9pt}{10.5pt}
+
+    % Пустые строчки делаются меньше (7pt): https://github.com/gpoore/minted/issues/199
+    \makeatletter
+        \let\FV@ListProcessLine@NoBreak@Orig\FV@ListProcessLine@NoBreak
+        \let\FV@ListProcessLine@Break@Orig\FV@ListProcessLine@Break
+        \def\FV@ListProcessLine@NoBreak#1{%
+          \ifx\FV@Line\empty
+            \hbox{}\vspace{\dimexpr-\baselineskip+7pt}%
+          \else
+            \FV@ListProcessLine@NoBreak@Orig{#1}%
+          \fi}
+        \def\FV@ListProcessLine@Break#1{%
+          \ifx\FV@Line\empty
+            \hbox{}\vspace{\dimexpr-\baselineskip+7pt}%
+          \else
+            \FV@ListProcessLine@Break@Orig{#1}%
+          \fi}
+    \makeatother
+    \inputminted[mathescape,breaklines,python3,tabsize=2]{python}{ReedMuller.py}
 \end{multicols*}
 \restoregeometry

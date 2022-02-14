@@ -1,15 +1,16 @@
 import itertools, math
-__all__ = ['encode', 'decode', 'message_length']
+__all__ = ['encode', 'decode', 'code_info']
 
-# Возвращает длину сообщения $k = \sum_{i=0}^r C_m^i$
-def message_length(r, m):
+# Возвращает длину сообщения $k = \sum_{i=0}^r C_m^i$, корректирующую способность $t = 2^{m - r - 1} - 1$ и длину кода $n = 2^m$
+def code_info(r, m):
 	'''
-	>>> message_length(1, 2)
-	3
-	>>> message_length(2, 4)
-	11
+	>>> code_info(1, 2)
+	{'k': 3, 't': 0, 'n': 4}
+	>>> code_info(2, 4)
+	{'k': 11, 't': 1, 'n': 16}
 	'''
-	return sum(math.comb(m, i) for i in range(0, r+1))
+	return {'k': sum(math.comb(m, i) for i in range(0, r+1)),
+	        't': 2**(m - r - 1) - 1, 'n': 2**m}
 
 # Возвращает $\{ A ⊆ \{0, …, m-1\} : |A| = t \}$
 def subsets(m, t):
@@ -138,5 +139,3 @@ def decode(r, m, y):
 # «Тесты»:
 import doctest; doctest.testmod()
 # Try: `python -i ReedMuller.py`
-
-# TODO: Хранить $u$ как int, а не список. Плохо влияет на понятность кода.

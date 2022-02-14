@@ -1,4 +1,15 @@
-import itertools
+import itertools, math
+__all__ = ['encode', 'decode', 'message_length']
+
+# Возвращает длину сообщения $k = \sum_{i=0}^r C_m^i$
+def message_length(r, m):
+	'''
+	>>> message_length(1, 2)
+	3
+	>>> message_length(2, 4)
+	11
+	'''
+	return sum(math.comb(m, i) for i in range(0, r+1))
 
 # Возвращает $\{ A ⊆ \{0, …, m-1\} : |A| = t \}$
 def subsets(m, t):
@@ -52,7 +63,7 @@ def encode(r, m, msg):
 	'0b1000111010001110'
 	'''
 	u = [None] * (2**m)
-	for i, A in zip(msg, all_subsets(r, m)):
+	for i, A in zip(msg, all_subsets(r, m), strict=True):
 	    u[A] = i
 	return evaluate(lambda: all_subsets(r, m), m, u)
 
@@ -98,7 +109,7 @@ def subspaceV_minusA(m, A):
 	        basis.append(mask)
 	return _subspace(basis)
 
-# Алгоритм Рида по псевдокоду, который был ранее
+# Алгоритм Рида по псевдокоду, который был в статье
 def decode(r, m, y):
 	'''
 	Попробуйте изменить здесь бит и запустить тесты снова!
@@ -125,6 +136,7 @@ def decode(r, m, y):
 	return bin(c), msg
 
 # «Тесты»:
-import doctest
-doctest.testmod()
+import doctest; doctest.testmod()
 # Try: `python -i ReedMuller.py`
+
+# TODO: Хранить $u$ как int, а не список. Плохо влияет на понятность кода.

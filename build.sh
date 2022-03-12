@@ -8,6 +8,7 @@ if [ "$#" -gt 0 ]; then
     shift
     $MK -jobname="ReedMuller-$jobname" "$@"
 else
+    $MK -jobname=ReedMuller-speaker
     $MK -jobname=ReedMuller-article
     $MK -jobname=ReedMuller-handout
     $MK -jobname=ReedMuller-slides

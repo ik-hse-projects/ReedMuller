@@ -1,3 +1,9 @@
+\begin{nonspeaker}
+\restoregeometry
+\clearpage
+
+Это вольный перевод раздела V-A из «\href{https://arxiv.org/pdf/2002.03317.pdf}{Reed-Muller Codes: Theory and Algorithms}» с \gray{моими комментариями} и некоторыми дополнительными доказательствами.
+
 \section{Reed's Algorithm: Unique decoding up to half the code distance}
 \label{ReedsAlgorithm}
 
@@ -70,6 +76,7 @@
     0,& num1 < 2^{m - t - 1}
 \end{cases}
 \]
+\end{nonspeaker}
 
 \subsection{Дополнительные доказательства}
 
@@ -130,6 +137,7 @@
     Теперь докажем, что мы перечислили все смежные классы. Как доказано ранее, их всего $2^{m - |A|}$. С другой стороны, $|V_{\overbar{A}}| = 2^{|\overbar{A}|} = 2^{m - |A|}$. Поскольку все элементы множества различны, то оно содержит все смежные классы.
 \end{proof}
 
+\begin{nonspeaker}
 \newgeometry{margin=11mm}
 \thispagestyle{empty}
 \subsection{Реализация алгоритма}
@@ -162,3 +170,4 @@
     \inputminted[mathescape,breaklines,python3,tabsize=2]{python}{ReedMuller.py}
 \end{multicols*}
 \restoregeometry
+\end{nonspeaker}

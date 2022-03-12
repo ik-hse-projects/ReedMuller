@@ -10,7 +10,7 @@ def code_info(r, m):
 	{'k': 11, 't': 1, 'n': 16}
 	'''
 	return {'k': sum(math.comb(m, i) for i in range(0, r+1)),
-	        't': 2**(m - r - 1) - 1, 'n': 2**m}
+	        'd': 2**(m-r), 't': 2**(m-r - 1) - 1, 'n': 2**m}
 
 # Возвращает $\{ A ⊆ \{0, …, m-1\} : |A| = t \}$
 def subsets(m, t):

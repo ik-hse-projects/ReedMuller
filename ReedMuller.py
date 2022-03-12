@@ -5,9 +5,9 @@ __all__ = ['encode', 'decode', 'code_info']
 def code_info(r, m):
 	'''
 	>>> code_info(1, 2)
-	{'k': 3, 't': 0, 'n': 4}
+	{'k': 3, 'd': 2, 't': 0, 'n': 4}
 	>>> code_info(2, 4)
-	{'k': 11, 't': 1, 'n': 16}
+	{'k': 11, 'd': 4, 't': 1, 'n': 16}
 	'''
 	return {'k': sum(math.comb(m, i) for i in range(0, r+1)),
 	        'd': 2**(m-r), 't': 2**(m-r - 1) - 1, 'n': 2**m}
